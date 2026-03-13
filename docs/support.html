@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>huje.tools — Support & Terms</title>
+  <meta name="description" content="Usage terms, copyright policy, and support for huje.tools.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #f97316;
+      --orange-dim: rgba(249, 115, 22, 0.15);
+      --bg: #0f172a;
+      --card: #1e293b;
+      --card-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--orange); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 80px 24px 48px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    h1 strong { color: var(--orange); }
+
+    .subtitle {
+      color: var(--text-muted);
+      margin-bottom: 48px;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--orange);
+      margin: 32px 0 12px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 6px;
+    }
+
+    p, li {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    li { margin-bottom: 6px; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .card p { margin-bottom: 0; }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 48px 16px 32px; }
+      h1 { font-size: 1.6rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1><strong>huje.tools</strong> — Support & Terms</h1>
+    <p class="subtitle"><a href="/">Back to huje.tools</a></p>
+
+    <h2>Usage & Copyright Responsibility</h2>
+    <div class="card">
+      <p>You are solely responsible for ensuring you have the legal right to process any content you submit to huje.tools, whether using our open-source packages locally or via our hosted services. By using any huje.tools product, you accept full responsibility for the content you process and how you use the results.</p>
+    </div>
+
+    <h2>What We Provide</h2>
+    <p>huje.tools provides open-source software packages and optional hosted compute services. We do not store, host, or redistribute user-submitted content.</p>
+    <ul>
+      <li>Open-source packages (PyPI) run entirely on your own hardware</li>
+      <li>Hosted services provide temporary compute only — uploaded files are deleted within 24 hours</li>
+      <li>Analysis results are retained for 90 days, then automatically deleted</li>
+    </ul>
+
+    <h2>Hosted Service Authentication</h2>
+    <p>All hosted service requests are authenticated via NIP-98 (Nostr HTTP auth) and paid via Bitcoin Lightning. Every request is cryptographically signed by the user's Nostr keypair, creating an attribution trail:</p>
+    <ul>
+      <li>Your Nostr public key (npub) identifies you as the requester</li>
+      <li>Your NIP-98 signature proves you authorized the request</li>
+      <li>Your Lightning payment is tied to the specific request</li>
+    </ul>
+
+    <h2>Copyright & DMCA</h2>
+    <ul>
+      <li>Users must have legal rights to process any content they submit</li>
+      <li>huje.tools does not make copyright determinations</li>
+      <li>We honor DMCA and takedown requests — contact <a href="mailto:hello@humanjava.com">hello@humanjava.com</a></li>
+      <li>Abuse (mass scraping, circumvention) results in npub ban</li>
+    </ul>
+
+    <h2>Disclaimer</h2>
+    <p>All huje.tools products are provided as-is, without warranty of any kind. Humanjava Enterprises is not liable for how users use analysis results or any other output from our tools.</p>
+
+    <h2>Contact</h2>
+    <p>For support, legal inquiries, or takedown requests: <a href="mailto:hello@humanjava.com">hello@humanjava.com</a></p>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 <a href="https://humanjava.com">Humanjava Enterprises</a></p>
+  </footer>
+</body>
+</html>
