@@ -114,6 +114,9 @@
       font-family: 'SF Mono', 'Fira Code', monospace;
       color: var(--orange);
     }
+    .tool-card .code-block {
+      margin-top: 4px;
+    }
 
     /* Code example */
     .example {
@@ -218,21 +221,6 @@
 
     <article class="tool-card">
       <div class="tool-header">
-        <h2>socialcard</h2>
-        <span class="tool-badge">New</span>
-      </div>
-      <p class="tool-desc">Generate beautiful social card images (OG, Twitter, GitHub) with a fluent builder API. One dependency: Pillow.</p>
-      <div class="tool-links">
-        <code>pip install socialcard</code>
-      </div>
-      <div class="tool-links">
-        <a href="https://pypi.org/project/socialcard/">PyPI</a>
-        <a href="https://github.com/HumanjavaEnterprises/huje.socialcard.OC-python.src">Source</a>
-      </div>
-    </article>
-
-    <article class="tool-card">
-      <div class="tool-header">
         <h2>sense-music</h2>
         <span class="tool-badge">New</span>
       </div>
@@ -244,20 +232,26 @@
         <a href="https://pypi.org/project/sense-music/">PyPI</a>
         <a href="https://github.com/HumanjavaEnterprises/huje.sensemusic.OC-python.src">Source</a>
       </div>
-    </article>
-
-    <section class="example">
-      <h3>sense-music — quick start</h3>
       <div class="code-block">
         <span class="kw">from</span> sense_music <span class="kw">import</span> <span class="fn">analyze</span><br><br>
         result = <span class="fn">analyze</span>(<span class="str">"song.mp3"</span>)<br>
         <span class="kw">print</span>(result.summary)<br>
         result.<span class="fn">save</span>(<span class="str">"output/"</span>)
       </div>
-    </section>
+    </article>
 
-    <section class="example">
-      <h3>socialcard — quick start</h3>
+    <article class="tool-card">
+      <div class="tool-header">
+        <h2>socialcard</h2>
+      </div>
+      <p class="tool-desc">Generate beautiful social card images (OG, Twitter, GitHub) with a fluent builder API. One dependency: Pillow.</p>
+      <div class="tool-links">
+        <code>pip install socialcard</code>
+      </div>
+      <div class="tool-links">
+        <a href="https://pypi.org/project/socialcard/">PyPI</a>
+        <a href="https://github.com/HumanjavaEnterprises/huje.socialcard.OC-python.src">Source</a>
+      </div>
       <div class="code-block">
         <span class="kw">from</span> socialcard <span class="kw">import</span> <span class="fn">SocialCard</span><br><br>
         <span class="fn">SocialCard</span>(<span class="str">"og"</span>)<br>
@@ -265,7 +259,7 @@
         &nbsp;&nbsp;.<span class="fn">subtitle</span>(<span class="str">"A cool tool"</span>)<br>
         &nbsp;&nbsp;.<span class="fn">render</span>(<span class="str">"card.png"</span>)
       </div>
-    </section>
+    </article>
 
     <section class="features">
       <div class="feature">
