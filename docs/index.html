@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>huje.tools — Tools for builders in the agentic age</title>
+  <meta name="description" content="Open-source tools for AI agents and builders. From Humanjava Enterprises.">
+  <meta property="og:title" content="huje.tools — Tools for builders in the agentic age">
+  <meta property="og:description" content="Open-source tools for AI agents and builders. From Humanjava Enterprises.">
+  <meta property="og:image" content="https://huje.tools/og-image.png">
+  <meta property="og:url" content="https://huje.tools">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="huje.tools — Tools for builders in the agentic age">
+  <meta name="twitter:description" content="Open-source tools for AI agents and builders.">
+  <meta name="twitter:image" content="https://huje.tools/og-image.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #f97316;
+      --orange-dim: rgba(249, 115, 22, 0.15);
+      --bg: #0f172a;
+      --card: #1e293b;
+      --card-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--orange); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 100px 24px 60px;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .hero h1 strong {
+      color: var(--orange);
+      font-weight: 700;
+    }
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+    .hero p a {
+      color: var(--text-muted);
+      text-decoration: underline;
+    }
+
+    /* Tool card */
+    .tool-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 32px;
+      margin: 0 auto 48px;
+    }
+    .tool-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .tool-badge {
+      background: var(--orange-dim);
+      color: var(--orange);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .tool-header h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .tool-desc {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .tool-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .tool-links code {
+      background: var(--bg);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--orange);
+    }
+
+    /* Code example */
+    .example {
+      margin: 0 auto 48px;
+    }
+    .example h3 {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      color: var(--text-muted);
+    }
+    .code-block {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      overflow-x: auto;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .code-block .kw { color: #c084fc; }
+    .code-block .str { color: #86efac; }
+    .code-block .fn { color: #93c5fd; }
+    .code-block .comment { color: #64748b; }
+
+    /* Features grid */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 0 auto 48px;
+    }
+    .feature {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .feature h4 {
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+    .feature p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      padding: 40px 24px;
+      margin-bottom: 48px;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--bg);
+      font-weight: 600;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: opacity 0.2s;
+    }
+    .btn:hover {
+      opacity: 0.9;
+      text-decoration: none;
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+      margin-left: 12px;
+    }
+    .btn-ghost:hover { color: var(--text); border-color: var(--text-muted); }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      .tool-card { padding: 20px; }
+      .features { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="hero">
+      <h1>Tools for builders in the <strong>agentic age</strong></h1>
+      <p>From <a href="https://humanjava.com">humanjava.com</a></p>
+    </section>
+
+    <article class="tool-card">
+      <div class="tool-header">
+        <h2>socialcard</h2>
+        <span class="tool-badge">New</span>
+      </div>
+      <p class="tool-desc">Generate beautiful social card images (OG, Twitter, GitHub) with a fluent builder API. One dependency: Pillow.</p>
+      <div class="tool-links">
+        <code>pip install socialcard</code>
+      </div>
+      <div class="tool-links">
+        <a href="https://pypi.org/project/socialcard/">PyPI</a>
+        <a href="https://github.com/HumanjavaEnterprises/huje.socialcard.OC-python.src">Source</a>
+      </div>
+    </article>
+
+    <section class="example">
+      <h3>Quick start</h3>
+      <div class="code-block">
+        <span class="kw">from</span> socialcard <span class="kw">import</span> <span class="fn">SocialCard</span><br><br>
+        <span class="fn">SocialCard</span>(<span class="str">"og"</span>)<br>
+        &nbsp;&nbsp;.<span class="fn">title</span>(<span class="str">"My Project"</span>)<br>
+        &nbsp;&nbsp;.<span class="fn">subtitle</span>(<span class="str">"A cool tool"</span>)<br>
+        &nbsp;&nbsp;.<span class="fn">render</span>(<span class="str">"card.png"</span>)
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="feature">
+        <h4>Generic</h4>
+        <p>Not tied to any brand. Use it for anything.</p>
+      </div>
+      <div class="feature">
+        <h4>AI-native</h4>
+        <p>Built as an OpenClaw skill. Any agent can use it.</p>
+      </div>
+      <div class="feature">
+        <h4>Minimal deps</h4>
+        <p>Just Pillow. No headless browsers, no Node.</p>
+      </div>
+      <div class="feature">
+        <h4>Builder API</h4>
+        <p>Chain methods. Set what you need, skip the rest.</p>
+      </div>
+      <div class="feature">
+        <h4>MIT licensed</h4>
+        <p>Use it however you want. Free forever.</p>
+      </div>
+      <div class="feature">
+        <h4>ClawHub ready</h4>
+        <p>Install via clawhub for AI agent workflows.</p>
+      </div>
+    </section>
+
+    <section class="cta">
+      <a href="https://github.com/HumanjavaEnterprises/huje.socialcard.OC-python.src" class="btn">Start building</a>
+      <a href="https://github.com/HumanjavaEnterprises" class="btn btn-ghost">GitHub</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>huje.tools &middot; <a href="https://humanjava.com">Humanjava Enterprises</a></p>
+  </footer>
+</body>
+</html>
