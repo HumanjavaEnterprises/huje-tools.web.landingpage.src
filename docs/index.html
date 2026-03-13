@@ -98,22 +98,48 @@
     }
     .tool-desc {
       color: var(--text-muted);
-      margin-bottom: 20px;
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      line-height: 1.5;
     }
-    .tool-links {
+    .card-install {
+      background: var(--bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 0.85rem;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+    .card-links {
       display: flex;
-      gap: 16px;
+      gap: 8px;
       flex-wrap: wrap;
       margin-bottom: 20px;
     }
-    .tool-links code {
-      background: var(--bg);
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      color: var(--orange);
+    .card-links a {
+      font-size: 0.8rem;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s;
     }
+    .card-links a:hover {
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+    .card-link-primary {
+      background: var(--orange);
+      color: var(--bg) !important;
+    }
+    .card-link-secondary {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text) !important;
+    }
+    .card-link-secondary:hover { border-color: var(--orange); }
     .tool-card .code-block {
       margin-top: 4px;
     }
@@ -225,12 +251,11 @@
         <span class="tool-badge">New</span>
       </div>
       <p class="tool-desc">Turn audio into structured analysis and annotated visualizations for AI perception. Liner notes for an AI.</p>
-      <div class="tool-links">
-        <code>pip install sense-music</code>
-      </div>
-      <div class="tool-links">
-        <a href="https://pypi.org/project/sense-music/">PyPI</a>
-        <a href="https://github.com/HumanjavaEnterprises/huje.sensemusic.OC-python.src">Source</a>
+      <div class="card-install">pip install sense-music</div>
+      <div class="card-links">
+        <a href="https://pypi.org/project/sense-music/" class="card-link-primary">PyPI</a>
+        <a href="https://clawhub.ai/skills/sense-music" class="card-link-secondary">ClawHub</a>
+        <a href="https://github.com/HumanjavaEnterprises/huje.sensemusic.OC-python.src" class="card-link-secondary">Source</a>
       </div>
       <div class="code-block">
         <span class="kw">from</span> sense_music <span class="kw">import</span> <span class="fn">analyze</span><br><br>
@@ -245,12 +270,11 @@
         <h2>socialcard</h2>
       </div>
       <p class="tool-desc">Generate beautiful social card images (OG, Twitter, GitHub) with a fluent builder API. One dependency: Pillow.</p>
-      <div class="tool-links">
-        <code>pip install socialcard</code>
-      </div>
-      <div class="tool-links">
-        <a href="https://pypi.org/project/socialcard/">PyPI</a>
-        <a href="https://github.com/HumanjavaEnterprises/huje.socialcard.OC-python.src">Source</a>
+      <div class="card-install">pip install socialcard</div>
+      <div class="card-links">
+        <a href="https://pypi.org/project/socialcard/" class="card-link-primary">PyPI</a>
+        <a href="https://clawhub.ai/skills/socialcard" class="card-link-secondary">ClawHub</a>
+        <a href="https://github.com/HumanjavaEnterprises/huje.socialcard.OC-python.src" class="card-link-secondary">Source</a>
       </div>
       <div class="code-block">
         <span class="kw">from</span> socialcard <span class="kw">import</span> <span class="fn">SocialCard</span><br><br>
