@@ -231,8 +231,33 @@
       </div>
     </article>
 
+    <article class="tool-card">
+      <div class="tool-header">
+        <h2>sense-music</h2>
+        <span class="tool-badge">New</span>
+      </div>
+      <p class="tool-desc">Turn audio into structured analysis and annotated visualizations for AI perception. Liner notes for an AI.</p>
+      <div class="tool-links">
+        <code>pip install sense-music</code>
+      </div>
+      <div class="tool-links">
+        <a href="https://pypi.org/project/sense-music/">PyPI</a>
+        <a href="https://github.com/HumanjavaEnterprises/huje.sensemusic.OC-python.src">Source</a>
+      </div>
+    </article>
+
     <section class="example">
-      <h3>Quick start</h3>
+      <h3>sense-music — quick start</h3>
+      <div class="code-block">
+        <span class="kw">from</span> sense_music <span class="kw">import</span> <span class="fn">analyze</span><br><br>
+        result = <span class="fn">analyze</span>(<span class="str">"song.mp3"</span>)<br>
+        <span class="kw">print</span>(result.summary)<br>
+        result.<span class="fn">save</span>(<span class="str">"output/"</span>)
+      </div>
+    </section>
+
+    <section class="example">
+      <h3>socialcard — quick start</h3>
       <div class="code-block">
         <span class="kw">from</span> socialcard <span class="kw">import</span> <span class="fn">SocialCard</span><br><br>
         <span class="fn">SocialCard</span>(<span class="str">"og"</span>)<br>
