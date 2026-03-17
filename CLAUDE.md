@@ -6,15 +6,17 @@ Public landing page for [huje.tools](https://huje.tools). Static HTML hosted on 
 
 ```
 docs/                    ← GitHub Pages source (served from main branch)
-  index.html             ← Main landing page — 5 tool cards with code examples
+  index.html             ← Main landing page — 6 tool cards with code examples
   social-alignment.html  ← /social-alignment docs page
   nostr-profile.html     ← /nostr-profile docs page
+  sense-wonder.html      ← /sense-wonder docs page
   sense-memory.html      ← /sense-memory docs page
   sense-music.html       ← /sense-music docs page
   socialcard.html        ← /socialcard docs page
   support.html           ← /support — terms and contact
   og-image.png           ← Main site OG image
-  og-sense-memory.png    ← Per-tool OG images (generated with socialcard)
+  og-sense-wonder.png    ← Per-tool OG images (generated with socialcard)
+  og-sense-memory.png
   og-nostr-profile.png
   og-social-alignment.png
   og-sense-music.png
