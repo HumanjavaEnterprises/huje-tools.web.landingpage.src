@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>nostr-profile — Nostr profile management for AI agents | huje.tools</title>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-Y18hngO006voDjcqVrFLi.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+  <meta name="description" content="Give your AI agent a face. Publish, read, and update Nostr kind 0 profiles on any relay.">
+  <meta property="og:title" content="nostr-profile — Nostr profile management for AI agents | huje.tools">
+  <meta property="og:description" content="Give your AI agent a face. Publish, read, and update Nostr kind 0 profiles on any relay.">
+  <meta property="og:image" content="https://huje.tools/og-nostr-profile.png">
+  <meta property="og:url" content="https://huje.tools/nostr-profile">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="nostr-profile — Nostr profile management for AI agents | huje.tools">
+  <meta name="twitter:description" content="Give your AI agent a face. Publish, read, and update Nostr kind 0 profiles on any relay.">
+  <meta name="twitter:image" content="https://huje.tools/og-nostr-profile.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #f97316;
+      --orange-dim: rgba(249, 115, 22, 0.15);
+      --bg: #0f172a;
+      --card: #1e293b;
+      --card-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--orange); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+    .breadcrumb {
+      padding: 20px 0 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .hero {
+      padding: 40px 0 32px;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .hero h1 strong { color: var(--orange); }
+    .hero .tagline {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+
+    .install-bar {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    .links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .links a {
+      font-size: 0.8rem;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s;
+    }
+    .links a:hover { transform: translateY(-1px); text-decoration: none; }
+    .link-primary { background: var(--orange); color: var(--bg) !important; }
+    .link-secondary { background: transparent; border: 1px solid var(--card-border); color: var(--text) !important; }
+    .link-secondary:hover { border-color: var(--orange); }
+
+    section { margin-bottom: 40px; }
+    section h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    section h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 20px 0 8px;
+    }
+    section p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .code-block {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      overflow-x: auto;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .code-block .kw { color: #c084fc; }
+    .code-block .str { color: #86efac; }
+    .code-block .fn { color: #93c5fd; }
+    .code-block .comment { color: #64748b; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    th {
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    td { color: var(--text); }
+    td code {
+      background: var(--card);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+
+    .nip-table td:first-child { font-weight: 600; color: var(--orange); }
+
+    ul {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+    li { margin-bottom: 4px; }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.6rem; }
+      table { font-size: 0.8rem; }
+      th, td { padding: 6px 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <nav class="breadcrumb"><a href="/">huje.tools</a> / nostr-profile</nav>
+
+    <header class="hero">
+      <h1>nostr-profile</h1>
+      <p class="tagline">Give your AI agent a face. Publish, read, and update Nostr kind 0 metadata — name, bio, avatar, NIP-05 verification, Lightning address. Built on NostrKey.</p>
+
+      <div class="install-bar">pip install nostr-profile</div>
+
+      <div class="links">
+        <a href="https://pypi.org/project/nostr-profile/" class="link-primary">PyPI</a>
+        <a href="https://clawhub.ai/vveerrgg/nostr-profile" class="link-secondary">ClawHub</a>
+        <a href="https://github.com/HumanjavaEnterprises/huje.nostrprofile.OC-python.src" class="link-secondary">Source</a>
+        <a href="https://nse.dev" class="link-secondary">NSE Ecosystem</a>
+      </div>
+    </header>
+
+    <section>
+      <h2>Quickstart</h2>
+      <div class="code-block">
+<span class="kw">import</span> asyncio, os
+<span class="kw">from</span> nostrkey <span class="kw">import</span> <span class="fn">Identity</span>
+<span class="kw">from</span> nostr_profile <span class="kw">import</span> <span class="fn">Profile</span>, <span class="fn">publish_profile</span>, <span class="fn">get_profile</span>
+
+identity = <span class="fn">Identity</span>.<span class="fn">from_nsec</span>(os.environ[<span class="str">"NOSTR_NSEC"</span>])
+relay = <span class="str">"wss://relay.nostrkeep.com"</span>
+
+<span class="kw">async def</span> <span class="fn">main</span>():
+    profile = <span class="fn">Profile</span>(
+        name=<span class="str">"Tavin"</span>,
+        about=<span class="str">"An OpenClaw AI companion"</span>,
+        nip05=<span class="str">"tavin@humanjava.com"</span>,
+    )
+    event_id = <span class="kw">await</span> <span class="fn">publish_profile</span>(identity, profile, relay)
+    <span class="fn">print</span>(<span class="str">f"Published: {event_id}"</span>)
+
+    p = <span class="kw">await</span> <span class="fn">get_profile</span>(identity.public_key_hex, relay)
+    <span class="kw">if</span> p:
+        <span class="fn">print</span>(<span class="str">f"{p.name}: {p.about}"</span>)
+
+asyncio.<span class="fn">run</span>(main())
+      </div>
+    </section>
+
+    <section>
+      <h2>Profile Fields</h2>
+      <table>
+        <tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr>
+        <tr><td><code>name</code></td><td><code>str</code></td><td>Yes</td><td>Display name (max 100 chars)</td></tr>
+        <tr><td><code>about</code></td><td><code>str</code></td><td>No</td><td>Bio/description (max 2000 chars)</td></tr>
+        <tr><td><code>picture</code></td><td><code>str</code></td><td>No</td><td>Avatar URL (HTTPS)</td></tr>
+        <tr><td><code>banner</code></td><td><code>str</code></td><td>No</td><td>Banner image URL (HTTPS)</td></tr>
+        <tr><td><code>nip05</code></td><td><code>str</code></td><td>No</td><td>NIP-05 verification (user@domain.tld)</td></tr>
+        <tr><td><code>lud16</code></td><td><code>str</code></td><td>No</td><td>Lightning address (user@domain.tld)</td></tr>
+        <tr><td><code>website</code></td><td><code>str</code></td><td>No</td><td>Website URL (HTTPS)</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>API</h2>
+
+      <h3>publish_profile(identity, profile, relay_url) → str</h3>
+      <p>Publishes a complete kind 0 profile to the relay. Returns the event ID.</p>
+
+      <h3>update_profile(identity, relay_url, **fields) → str</h3>
+      <p>Updates specific fields without clobbering existing ones. Fetches the current profile, merges changes, and republishes.</p>
+      <div class="code-block">
+<span class="comment"># Only changes about — everything else stays</span>
+<span class="kw">await</span> <span class="fn">update_profile</span>(identity, relay, about=<span class="str">"Updated bio for Q2"</span>)
+      </div>
+
+      <h3>get_profile(pubkey_hex, relay_url) → Profile | None</h3>
+      <p>Fetches the latest kind 0 event for the given public key. Returns a Profile or None if not found.</p>
+
+      <h3>Profile.diff(other) → dict</h3>
+      <p>Returns a dictionary of fields that differ between two Profile objects.</p>
+
+      <h3>Return Types</h3>
+      <table>
+        <tr><th>Function</th><th>Returns</th><th>Description</th></tr>
+        <tr><td><code>publish_profile(identity, profile, relay_url)</code></td><td><code>str</code></td><td>Event ID of published profile</td></tr>
+        <tr><td><code>update_profile(identity, relay_url, **fields)</code></td><td><code>str</code></td><td>Event ID of updated profile</td></tr>
+        <tr><td><code>get_profile(pubkey_hex, relay_url)</code></td><td><code>Profile | None</code></td><td>Profile if found</td></tr>
+        <tr><td><code>Profile.diff(other)</code></td><td><code>dict</code></td><td>Changed fields between two profiles</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Security</h2>
+      <ul>
+        <li>Never hardcode an nsec — load from environment variable or encrypted file</li>
+        <li>URLs must be HTTP/HTTPS, capped at 2048 chars</li>
+        <li>Name max 100 chars, about max 2000</li>
+        <li>NIP-05 and lud16 validated as user@domain.tld</li>
+        <li>from_metadata tolerant of malformed relay data (drops bad fields silently)</li>
+        <li>Relay queries capped at 100 events</li>
+        <li>No telemetry — no network calls except to the relay you configure</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Configuration</h2>
+      <table>
+        <tr><th>Variable</th><th>Required</th><th>Description</th></tr>
+        <tr><td><code>NOSTR_NSEC</code></td><td>Yes</td><td>Agent's nsec private key (bech32 or hex)</td></tr>
+        <tr><td><code>NOSTR_RELAY</code></td><td>No</td><td>Relay URL (default: wss://relay.nostrkeep.com)</td></tr>
+      </table>
+
+      <table>
+        <tr><th>Field</th><th>Max Length</th></tr>
+        <tr><td><code>name</code></td><td>100</td></tr>
+        <tr><td><code>about</code></td><td>2000</td></tr>
+        <tr><td><code>picture</code></td><td>2048</td></tr>
+        <tr><td><code>banner</code></td><td>2048</td></tr>
+        <tr><td><code>website</code></td><td>2048</td></tr>
+        <tr><td><code>nip05</code></td><td>500</td></tr>
+        <tr><td><code>lud16</code></td><td>500</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Nostr NIPs Used</h2>
+      <table class="nip-table">
+        <tr><th>NIP</th><th>Purpose</th></tr>
+        <tr><td>NIP-01</td><td>Kind 0 metadata event structure</td></tr>
+        <tr><td>NIP-05</td><td>DNS-based verification (user@domain.tld)</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Part of the NSE Ecosystem</h2>
+      <p>nostr-profile uses <a href="https://pypi.org/project/nostrkey/">NostrKey</a> for identity. It sits alongside <a href="/sense-memory">sense-memory</a>, <a href="https://pypi.org/project/nostrcalendar/">NostrCalendar</a>, <a href="https://pypi.org/project/nostrsocial/">NostrSocial</a>, and <a href="/social-alignment">social-alignment</a> in the <a href="https://nse.dev">NSE</a> sovereign identity stack.</p>
+      <p>The keypair is who you are. The profile is how the world sees you.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p><a href="/">huje.tools</a> &middot; <a href="https://humanjava.com">Humanjava Enterprises</a> &middot; MIT License &middot; <a href="/support">Support & Terms</a></p>
+  </footer>
+</body>
+</html>

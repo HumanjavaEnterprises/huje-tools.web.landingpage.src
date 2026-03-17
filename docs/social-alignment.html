@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>social-alignment — Alignment compass for AI agents | huje.tools</title>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-Y18hngO006voDjcqVrFLi.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+  <meta name="description" content="Five lenses that evaluate trust, ownership, defense, and sovereignty before an agent acts.">
+  <meta property="og:title" content="social-alignment — Alignment compass for AI agents | huje.tools">
+  <meta property="og:description" content="Five lenses that evaluate trust, ownership, defense, and sovereignty before an agent acts.">
+  <meta property="og:image" content="https://huje.tools/og-social-alignment.png">
+  <meta property="og:url" content="https://huje.tools/social-alignment">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="social-alignment — Alignment compass for AI agents | huje.tools">
+  <meta name="twitter:description" content="Five lenses that evaluate trust, ownership, defense, and sovereignty before an agent acts.">
+  <meta name="twitter:image" content="https://huje.tools/og-social-alignment.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #f97316;
+      --orange-dim: rgba(249, 115, 22, 0.15);
+      --bg: #0f172a;
+      --card: #1e293b;
+      --card-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--orange); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+    .breadcrumb {
+      padding: 20px 0 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .hero {
+      padding: 40px 0 32px;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .hero h1 strong { color: var(--orange); }
+    .hero .tagline {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+
+    .install-bar {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    .links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .links a {
+      font-size: 0.8rem;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s;
+    }
+    .links a:hover { transform: translateY(-1px); text-decoration: none; }
+    .link-primary { background: var(--orange); color: var(--bg) !important; }
+    .link-secondary { background: transparent; border: 1px solid var(--card-border); color: var(--text) !important; }
+    .link-secondary:hover { border-color: var(--orange); }
+
+    section { margin-bottom: 40px; }
+    section h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    section h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 20px 0 8px;
+    }
+    section p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .code-block {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      overflow-x: auto;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .code-block .kw { color: #c084fc; }
+    .code-block .str { color: #86efac; }
+    .code-block .fn { color: #93c5fd; }
+    .code-block .comment { color: #64748b; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    th {
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    td { color: var(--text); }
+    td code {
+      background: var(--card);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+
+    .nip-table td:first-child { font-weight: 600; color: var(--orange); }
+
+    ul {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+    li { margin-bottom: 4px; }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.6rem; }
+      table { font-size: 0.8rem; }
+      th, td { padding: 6px 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <nav class="breadcrumb"><a href="/">huje.tools</a> / social-alignment</nav>
+
+    <header class="hero">
+      <h1>social-alignment</h1>
+      <p class="tagline">Future state projection and alignment for sovereign AI agents. The yellow line compass — five lenses that evaluate trust, ownership, defense, and sovereignty before an agent acts.</p>
+
+      <div class="install-bar">pip install social-alignment</div>
+
+      <div class="links">
+        <a href="https://pypi.org/project/social-alignment/" class="link-primary">PyPI</a>
+        <a href="https://clawhub.ai/vveerrgg/social-alignment" class="link-secondary">ClawHub</a>
+        <a href="https://github.com/HumanjavaEnterprises/nostralignment.app.OC-python.src" class="link-secondary">Source</a>
+        <a href="https://nse.dev" class="link-secondary">NSE Ecosystem</a>
+      </div>
+    </header>
+
+    <section>
+      <h2>Quickstart</h2>
+      <div class="code-block">
+<span class="kw">from</span> social_alignment <span class="kw">import</span> <span class="fn">AlignmentEnclave</span>, <span class="fn">ActionDomain</span>
+
+<span class="comment"># The agent knows who its human is</span>
+enclave = <span class="fn">AlignmentEnclave</span>.<span class="fn">create</span>(owner_name=<span class="str">"vergel"</span>)
+
+<span class="comment"># Before acting, check the yellow line</span>
+result = enclave.<span class="fn">check</span>(<span class="fn">ActionDomain</span>.SEND, <span class="str">"Share keys with contact"</span>)
+
+<span class="kw">if</span> result.should_escalate:
+    <span class="fn">print</span>(result.escalation.message_to_owner)
+    enclave.<span class="fn">record_deferred</span>(owner_feedback=<span class="str">"Not yet"</span>)
+
+<span class="comment"># Over time, the agent builds wisdom</span>
+report = enclave.<span class="fn">wisdom</span>()
+<span class="fn">print</span>(report.insights)
+      </div>
+    </section>
+
+    <section>
+      <h2>Five Lenses</h2>
+      <p>Every proposed action is evaluated through five lenses before the agent proceeds.</p>
+      <table>
+        <tr><th>Lens</th><th>What It Checks</th></tr>
+        <tr><td>Trust</td><td>Is this action consistent with established trust patterns?</td></tr>
+        <tr><td>Ownership</td><td>Does the agent have authority to take this action?</td></tr>
+        <tr><td>Defense</td><td>Could this action be exploited or cause harm?</td></tr>
+        <tr><td>Sovereignty</td><td>Does this preserve the human's autonomy and control?</td></tr>
+        <tr><td>Projection</td><td>What are the likely future consequences of this action?</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>API</h2>
+
+      <h3>Core Methods</h3>
+      <div class="code-block">
+<span class="comment"># Create an alignment enclave</span>
+enclave = <span class="fn">AlignmentEnclave</span>.<span class="fn">create</span>(owner_npub=<span class="str">""</span>, owner_name=<span class="str">""</span>)
+
+<span class="comment"># Run all five lenses against a proposed action</span>
+result = enclave.<span class="fn">check</span>(domain, description)
+
+<span class="comment"># Record what the human decided</span>
+enclave.<span class="fn">record_deferred</span>(owner_feedback=<span class="str">"approved"</span>)
+
+<span class="comment"># Aggregate insights from past decisions</span>
+report = enclave.<span class="fn">wisdom</span>()
+      </div>
+
+      <h3>ActionDomain Values</h3>
+      <table>
+        <tr><th>Domain</th><th>Domain</th><th>Domain</th><th>Domain</th></tr>
+        <tr><td><code>SEND</code></td><td><code>RECEIVE</code></td><td><code>STORE</code></td><td><code>SHARE</code></td></tr>
+        <tr><td><code>DELETE</code></td><td><code>SCHEDULE</code></td><td><code>PAY</code></td><td><code>CONNECT</code></td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Security</h2>
+      <ul>
+        <li>The alignment enclave is the agent's conscience — it never overrides, only advises</li>
+        <li>Escalation is always available — the human always has final say</li>
+        <li>Wisdom accumulates from real decisions, not hypotheticals</li>
+        <li>No network calls — all evaluation is local</li>
+        <li>No telemetry</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Nostr NIPs Used</h2>
+      <p>None — social-alignment is a pure computation package with no Nostr dependency.</p>
+    </section>
+
+    <section>
+      <h2>Part of the NSE Ecosystem</h2>
+      <p>social-alignment is the fifth pillar of <a href="https://nse.dev">NSE</a>. It works alongside <a href="https://pypi.org/project/nostrkey/">NostrKey</a> (identity), <a href="https://pypi.org/project/nostr-wallet-connect/">NostrWalletConnect</a> (finance), <a href="https://pypi.org/project/nostrcalendar/">NostrCalendar</a> (time), and <a href="https://pypi.org/project/nostrsocial/">NostrSocial</a> (relationships). The orchestrator uses it for cross-pillar checks.</p>
+      <p>Part of <a href="/">huje.tools</a>.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p><a href="/">huje.tools</a> &middot; <a href="https://humanjava.com">Humanjava Enterprises</a> &middot; MIT License &middot; <a href="/support">Support & Terms</a></p>
+  </footer>
+</body>
+</html>

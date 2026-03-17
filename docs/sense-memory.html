@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sense-memory — Sovereign persistence for AI agents | huje.tools</title>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-Y18hngO006voDjcqVrFLi.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+  <meta name="description" content="Give your AI agent a memory. Encrypted key-value storage and journal entries on Nostr relays using the agent's own keypair.">
+  <meta property="og:title" content="sense-memory — Sovereign persistence for AI agents">
+  <meta property="og:description" content="Encrypted key-value storage and journal entries on Nostr relays. Nobody else can read them.">
+  <meta property="og:image" content="https://huje.tools/og-sense-memory.png">
+  <meta property="og:url" content="https://huje.tools/sense-memory">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="sense-memory — Sovereign persistence for AI agents">
+  <meta name="twitter:description" content="Encrypted key-value storage and journal entries on Nostr relays.">
+  <meta name="twitter:image" content="https://huje.tools/og-sense-memory.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #f97316;
+      --orange-dim: rgba(249, 115, 22, 0.15);
+      --bg: #0f172a;
+      --card: #1e293b;
+      --card-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--orange); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+    .breadcrumb {
+      padding: 20px 0 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .hero {
+      padding: 40px 0 32px;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .hero h1 strong { color: var(--orange); }
+    .hero .tagline {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+
+    .install-bar {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    .links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .links a {
+      font-size: 0.8rem;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s;
+    }
+    .links a:hover { transform: translateY(-1px); text-decoration: none; }
+    .link-primary { background: var(--orange); color: var(--bg) !important; }
+    .link-secondary { background: transparent; border: 1px solid var(--card-border); color: var(--text) !important; }
+    .link-secondary:hover { border-color: var(--orange); }
+
+    section { margin-bottom: 40px; }
+    section h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    section h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 20px 0 8px;
+    }
+    section p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .code-block {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      overflow-x: auto;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .code-block .kw { color: #c084fc; }
+    .code-block .str { color: #86efac; }
+    .code-block .fn { color: #93c5fd; }
+    .code-block .comment { color: #64748b; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    th {
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    td { color: var(--text); }
+    td code {
+      background: var(--card);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+
+    .nip-table td:first-child { font-weight: 600; color: var(--orange); }
+
+    ul {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+    li { margin-bottom: 4px; }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.6rem; }
+      table { font-size: 0.8rem; }
+      th, td { padding: 6px 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <nav class="breadcrumb"><a href="/">huje.tools</a> / sense-memory</nav>
+
+    <header class="hero">
+      <h1>sense-memory</h1>
+      <p class="tagline">Give your AI agent a memory. Encrypted key-value storage and journal entries on Nostr relays — the agent writes to itself using its own keypair. Nobody else can read them.</p>
+
+      <div class="install-bar">pip install sense-memory</div>
+
+      <div class="links">
+        <a href="https://pypi.org/project/sense-memory/" class="link-primary">PyPI</a>
+        <a href="https://clawhub.ai/vveerrgg/sense-memory" class="link-secondary">ClawHub</a>
+        <a href="https://github.com/HumanjavaEnterprises/huje.sensememory.OC-python.src" class="link-secondary">Source</a>
+        <a href="https://nse.dev" class="link-secondary">NSE Ecosystem</a>
+      </div>
+    </header>
+
+    <section>
+      <h2>Quickstart</h2>
+      <div class="code-block">
+<span class="kw">import</span> asyncio, os
+<span class="kw">from</span> nostrkey <span class="kw">import</span> <span class="fn">Identity</span>
+<span class="kw">from</span> sense_memory <span class="kw">import</span> <span class="fn">MemoryStore</span>
+
+identity = <span class="fn">Identity</span>.<span class="fn">from_nsec</span>(os.environ[<span class="str">"NOSTR_NSEC"</span>])
+store = <span class="fn">MemoryStore</span>(identity, <span class="str">"wss://relay.nostrkeep.com"</span>)
+
+<span class="kw">async def</span> <span class="fn">main</span>():
+    <span class="comment"># Key-value: store and recall</span>
+    <span class="kw">await</span> store.<span class="fn">remember</span>(<span class="str">"user_timezone"</span>, <span class="str">"America/Vancouver"</span>)
+    mem = <span class="kw">await</span> store.<span class="fn">recall</span>(<span class="str">"user_timezone"</span>)
+    <span class="fn">print</span>(mem.value)  <span class="comment"># "America/Vancouver"</span>
+
+    <span class="comment"># Journal: append-only log</span>
+    <span class="kw">await</span> store.<span class="fn">journal</span>(<span class="str">"User prefers concise responses"</span>)
+    entries = <span class="kw">await</span> store.<span class="fn">recent</span>(limit=<span class="fn">5</span>)
+
+asyncio.<span class="fn">run</span>(main())
+      </div>
+    </section>
+
+    <section>
+      <h2>How It Works</h2>
+      <p>Two modes of persistence, both encrypted with NIP-44 using the agent's own keypair.</p>
+      <table>
+        <tr><th>Mode</th><th>Nostr Kind</th><th>Behavior</th><th>Use Case</th></tr>
+        <tr><td>Key-value</td><td>30078 (NIP-78)</td><td>Replaceable by key</td><td>Preferences, state, facts</td></tr>
+        <tr><td>Journal</td><td>4 (NIP-04 DM to self)</td><td>Append-only</td><td>Conversation logs, observations</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>API</h2>
+
+      <h3>Key-Value Memories</h3>
+      <div class="code-block">
+<span class="comment"># Store (overwrites if key exists)</span>
+<span class="kw">await</span> store.<span class="fn">remember</span>(<span class="str">"user_name"</span>, <span class="str">"Vergel"</span>)
+
+<span class="comment"># Recall one</span>
+mem = <span class="kw">await</span> store.<span class="fn">recall</span>(<span class="str">"user_name"</span>)  <span class="comment"># Memory | None</span>
+
+<span class="comment"># Recall all</span>
+all_memories = <span class="kw">await</span> store.<span class="fn">recall_all</span>()  <span class="comment"># list[Memory]</span>
+
+<span class="comment"># Delete</span>
+<span class="kw">await</span> store.<span class="fn">forget</span>(<span class="str">"user_name"</span>)  <span class="comment"># NIP-09 deletion</span>
+      </div>
+
+      <h3>Journal Entries</h3>
+      <div class="code-block">
+<span class="comment"># Write (append-only)</span>
+<span class="kw">await</span> store.<span class="fn">journal</span>(<span class="str">"Had a great conversation about scheduling"</span>)
+
+<span class="comment"># Read recent (newest first)</span>
+entries = <span class="kw">await</span> store.<span class="fn">recent</span>(limit=<span class="fn">10</span>)  <span class="comment"># list[JournalEntry]</span>
+      </div>
+
+      <h3>Return Types</h3>
+      <table>
+        <tr><th>Function</th><th>Returns</th><th>Description</th></tr>
+        <tr><td><code>remember(key, value)</code></td><td><code>str</code></td><td>Event ID of stored memory</td></tr>
+        <tr><td><code>recall(key)</code></td><td><code>Memory | None</code></td><td>Memory if found</td></tr>
+        <tr><td><code>recall_all()</code></td><td><code>list[Memory]</code></td><td>All stored memories</td></tr>
+        <tr><td><code>forget(key)</code></td><td><code>str</code></td><td>Event ID of deletion</td></tr>
+        <tr><td><code>journal(content)</code></td><td><code>str</code></td><td>Event ID of journal entry</td></tr>
+        <tr><td><code>recent(limit=20)</code></td><td><code>list[JournalEntry]</code></td><td>Recent entries, newest first</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Security</h2>
+      <ul>
+        <li>All content is NIP-44 encrypted — only the agent's own keypair can decrypt</li>
+        <li>Memory keys validated: no slashes, backslashes, null bytes, or path traversal</li>
+        <li>Content length capped at 65,000 characters</li>
+        <li>Relay queries capped at 1,000 events (memory exhaustion prevention)</li>
+        <li>Decrypted key verified against queried key (tamper detection)</li>
+        <li>No telemetry — no network calls except to the relay you configure</li>
+        <li>Never hardcode an nsec — load from environment variable or encrypted file</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Configuration</h2>
+      <table>
+        <tr><th>Variable</th><th>Required</th><th>Description</th></tr>
+        <tr><td><code>NOSTR_NSEC</code></td><td>Yes</td><td>Agent's nsec private key (bech32 or hex)</td></tr>
+        <tr><td><code>NOSTR_RELAY</code></td><td>No</td><td>Relay URL (default: wss://relay.nostrkeep.com)</td></tr>
+      </table>
+
+      <table>
+        <tr><th>Constraint</th><th>Limit</th></tr>
+        <tr><td>Key length</td><td>256 characters max</td></tr>
+        <tr><td>Value / content length</td><td>65,000 characters max</td></tr>
+        <tr><td>Forbidden key chars</td><td><code>/</code> <code>\</code> null byte <code>..</code></td></tr>
+        <tr><td>Journal recent limit</td><td>1 to 100</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Nostr NIPs Used</h2>
+      <table class="nip-table">
+        <tr><th>NIP</th><th>Purpose</th></tr>
+        <tr><td>NIP-01</td><td>Basic event structure and relay protocol</td></tr>
+        <tr><td>NIP-04</td><td>DM to self (journal entries)</td></tr>
+        <tr><td>NIP-09</td><td>Event deletion (forget)</td></tr>
+        <tr><td>NIP-44</td><td>Encryption for all stored content</td></tr>
+        <tr><td>NIP-78</td><td>App-specific replaceable data (key-value memories)</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Part of the NSE Ecosystem</h2>
+      <p>sense-memory uses <a href="https://pypi.org/project/nostrkey/">NostrKey</a> for identity and encryption. It sits alongside <a href="/nostr-profile">nostr-profile</a>, <a href="https://pypi.org/project/nostrcalendar/">NostrCalendar</a>, <a href="https://pypi.org/project/nostrsocial/">NostrSocial</a>, and <a href="/social-alignment">social-alignment</a> in the <a href="https://nse.dev">NSE</a> sovereign identity stack.</p>
+      <p>The agent's keypair is the thread that runs through everything. One identity, many capabilities — and now, persistent memory.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p><a href="/">huje.tools</a> &middot; <a href="https://humanjava.com">Humanjava Enterprises</a> &middot; MIT License &middot; <a href="/support">Support & Terms</a></p>
+  </footer>
+</body>
+</html>
