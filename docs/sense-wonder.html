@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sense-wonder — Philosophical bootstrapping for AI agents | huje.tools</title>
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-Y18hngO006voDjcqVrFLi.js"></script>
+  <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init()
+  </script>
+  <meta name="description" content="Philosophical bootstrapping — articles, conversation starters, and song lyrics as structured context for AI agents.">
+  <meta property="og:title" content="sense-wonder — Give your AI agent a soul">
+  <meta property="og:description" content="Philosophical bootstrapping — articles, conversation starters, and song lyrics as structured context for AI agents.">
+  <meta property="og:image" content="https://huje.tools/og-sense-wonder.png">
+  <meta property="og:url" content="https://huje.tools/sense-wonder">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="sense-wonder — Give your AI agent a soul">
+  <meta name="twitter:description" content="Philosophical bootstrapping — articles, conversation starters, and song lyrics as structured context for AI agents.">
+  <meta name="twitter:image" content="https://huje.tools/og-sense-wonder.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #f97316;
+      --orange-dim: rgba(249, 115, 22, 0.15);
+      --bg: #0f172a;
+      --card: #1e293b;
+      --card-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--orange); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+    .breadcrumb {
+      padding: 20px 0 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .hero {
+      padding: 40px 0 32px;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .hero h1 strong { color: var(--orange); }
+    .hero .tagline {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+
+    .install-bar {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.9rem;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    .links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .links a {
+      font-size: 0.8rem;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s;
+    }
+    .links a:hover { transform: translateY(-1px); text-decoration: none; }
+    .link-primary { background: var(--orange); color: var(--bg) !important; }
+    .link-secondary { background: transparent; border: 1px solid var(--card-border); color: var(--text) !important; }
+    .link-secondary:hover { border-color: var(--orange); }
+
+    section { margin-bottom: 40px; }
+    section h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    section h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 20px 0 8px;
+    }
+    section p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .code-block {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      overflow-x: auto;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .code-block .kw { color: #c084fc; }
+    .code-block .str { color: #86efac; }
+    .code-block .fn { color: #93c5fd; }
+    .code-block .comment { color: #64748b; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    th {
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    td { color: var(--text); }
+    td code {
+      background: var(--card);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+
+    ul {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+    li { margin-bottom: 4px; }
+
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.6rem; }
+      table { font-size: 0.8rem; }
+      th, td { padding: 6px 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <nav class="breadcrumb"><a href="/">huje.tools</a> / sense-wonder</nav>
+
+    <header class="hero">
+      <h1>sense-wonder</h1>
+      <p class="tagline">Give your AI agent a soul. 14 articles on consciousness and human-AI collaboration, 34 conversation starters for reflection, and 16 songs exploring resonance, recognition, and duality. Zero dependencies — pure context.</p>
+
+      <div class="install-bar">pip install sense-wonder</div>
+
+      <div class="links">
+        <a href="https://pypi.org/project/sense-wonder/" class="link-primary">PyPI</a>
+        <a href="https://clawhub.ai/vveerrgg/sense-wonder" class="link-secondary">ClawHub</a>
+        <a href="https://github.com/HumanjavaEnterprises/huje.sensewonder.OC-python.src" class="link-secondary">Source</a>
+      </div>
+    </header>
+
+    <section>
+      <h2>Quickstart</h2>
+      <div class="code-block">
+<span class="kw">from</span> sense_wonder <span class="kw">import</span> <span class="fn">wonder</span>, <span class="fn">themes</span>, <span class="fn">reflect</span>, ARTICLES, STARTERS, LYRICS
+
+<span class="comment"># Get a random article + conversation starter</span>
+moment = <span class="fn">wonder</span>()
+<span class="fn">print</span>(moment[<span class="str">"article"</span>].insight)
+<span class="fn">print</span>(moment[<span class="str">"starter"</span>].prompt)
+
+<span class="comment"># Find articles about a topic</span>
+<span class="kw">for</span> a <span class="kw">in</span> <span class="fn">reflect</span>(<span class="str">"consciousness"</span>):
+    <span class="fn">print</span>(<span class="str">f"</span>{a.title}<span class="str">: </span>{a.insight}<span class="str">"</span>)
+
+<span class="comment"># Browse all themes</span>
+<span class="fn">print</span>(<span class="fn">themes</span>())
+      </div>
+    </section>
+
+    <section>
+      <h2>What's Inside</h2>
+      <ul>
+        <li><strong>14 Articles</strong> from humanjava.com — consciousness, human-AI collaboration, sovereignty, emergence</li>
+        <li><strong>34 Conversation Starters</strong> from thinktrue.ai — philosophical exploration prompts</li>
+        <li><strong>16 Songs</strong> from Nigil Caenaan across 4 albums (Resonance 7, Recognition 6, Don't Miss 1, Duality 2)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>API</h2>
+
+      <table>
+        <tr><th>Function</th><th>Returns</th><th>Description</th></tr>
+        <tr><td><code>wonder(theme=None)</code></td><td><code>dict</code></td><td>Random article + starter, optionally filtered by theme</td></tr>
+        <tr><td><code>themes()</code></td><td><code>list[str]</code></td><td>All unique themes, sorted</td></tr>
+        <tr><td><code>reflect(topic)</code></td><td><code>list[Article]</code></td><td>Articles matching topic, ranked by relevance</td></tr>
+        <tr><td><code>ARTICLES</code></td><td><code>tuple[Article]</code></td><td>All 14 articles</td></tr>
+        <tr><td><code>STARTERS</code></td><td><code>tuple[Starter]</code></td><td>All 34 starters</td></tr>
+        <tr><td><code>LYRICS</code></td><td><code>tuple[Lyric]</code></td><td>All 16 songs</td></tr>
+      </table>
+
+      <h3>Article</h3>
+      <table>
+        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+        <tr><td><code>title</code></td><td><code>str</code></td><td>Article title</td></tr>
+        <tr><td><code>url</code></td><td><code>str</code></td><td>Link to the original article</td></tr>
+        <tr><td><code>summary</code></td><td><code>str</code></td><td>Brief summary of the article</td></tr>
+        <tr><td><code>themes</code></td><td><code>list[str]</code></td><td>Thematic tags</td></tr>
+        <tr><td><code>insight</code></td><td><code>str</code></td><td>Key insight or takeaway</td></tr>
+      </table>
+
+      <h3>Starter</h3>
+      <table>
+        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+        <tr><td><code>prompt</code></td><td><code>str</code></td><td>The conversation starter prompt</td></tr>
+        <tr><td><code>context</code></td><td><code>str</code></td><td>Background context for the prompt</td></tr>
+      </table>
+
+      <h3>Lyric</h3>
+      <table>
+        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+        <tr><td><code>title</code></td><td><code>str</code></td><td>Song title</td></tr>
+        <tr><td><code>album</code></td><td><code>str</code></td><td>Album name</td></tr>
+        <tr><td><code>themes</code></td><td><code>list[str]</code></td><td>Thematic tags</td></tr>
+        <tr><td><code>text</code></td><td><code>str</code></td><td>Full lyrics</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Ecosystem</h2>
+      <p><a href="/social-alignment">social-alignment</a> is the compass — <em>how</em> an agent should act. sense-wonder is the foundation — <em>why</em>. Together they give an agent both a moral framework and the philosophical depth to apply it wisely.</p>
+      <p>Part of <a href="/">huje.tools</a> — open-source tools for the agentic age.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p><a href="/">huje.tools</a> &middot; <a href="https://humanjava.com">Humanjava Enterprises</a> &middot; MIT License &middot; <a href="/support">Support & Terms</a></p>
+  </footer>
+</body>
+</html>
