@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>huje.tools — Tools for builders in the agentic age</title>
-  <meta name="description" content="Open-source tools for AI agents and builders. From Humanjava Enterprises.">
+  <meta name="description" content="Open-source tools for AI agents and builders — alignment, profiles, memory, music analysis, social cards. From Humanjava Enterprises.">
   <meta property="og:title" content="huje.tools — Tools for builders in the agentic age">
-  <meta property="og:description" content="Open-source tools for AI agents and builders. From Humanjava Enterprises.">
+  <meta property="og:description" content="Open-source tools for AI agents and builders — alignment, profiles, memory, music analysis, social cards. From Humanjava Enterprises.">
   <meta property="og:image" content="https://huje.tools/og-image.png">
   <meta property="og:url" content="https://huje.tools">
   <meta property="og:type" content="website">
@@ -269,6 +269,50 @@
         <span class="comment"># Over time, the agent builds wisdom</span><br>
         report = enclave.<span class="fn">wisdom</span>()<br>
         <span class="fn">print</span>(report.insights)
+      </div>
+    </article>
+
+    <article class="tool-card">
+      <div class="tool-header">
+        <h2>nostr-profile</h2>
+        <span class="tool-badge">New</span>
+      </div>
+      <p class="tool-desc">Give your AI agent a face. Publish, read, and update Nostr kind 0 profiles — name, bio, avatar, NIP-05 verification, Lightning address. Built on NostrKey.</p>
+      <div class="card-install">pip install nostr-profile</div>
+      <div class="card-links">
+        <a href="https://pypi.org/project/nostr-profile/" class="card-link-primary">PyPI</a>
+        <a href="https://clawhub.ai/vveerrgg/nostr-profile" class="card-link-secondary">ClawHub</a>
+        <a href="https://github.com/HumanjavaEnterprises/huje.nostrprofile.OC-python.src" class="card-link-secondary">Source</a>
+      </div>
+      <div class="code-block">
+        <span class="kw">from</span> nostr_profile <span class="kw">import</span> <span class="fn">Profile</span>, <span class="fn">publish_profile</span><br><br>
+        profile = <span class="fn">Profile</span>(<br>
+        &nbsp;&nbsp;name=<span class="str">"Tavin"</span>,<br>
+        &nbsp;&nbsp;about=<span class="str">"An OpenClaw AI companion"</span>,<br>
+        &nbsp;&nbsp;nip05=<span class="str">"tavin@humanjava.com"</span>,<br>
+        )<br>
+        <span class="kw">await</span> <span class="fn">publish_profile</span>(identity, profile, relay)
+      </div>
+    </article>
+
+    <article class="tool-card">
+      <div class="tool-header">
+        <h2>sense-memory</h2>
+        <span class="tool-badge">New</span>
+      </div>
+      <p class="tool-desc">Give your AI agent a memory. Encrypted key-value storage and journal entries on Nostr relays — the agent writes to itself using its own keypair. Nobody else can read them.</p>
+      <div class="card-install">pip install sense-memory</div>
+      <div class="card-links">
+        <a href="https://pypi.org/project/sense-memory/" class="card-link-primary">PyPI</a>
+        <a href="https://clawhub.ai/vveerrgg/sense-memory" class="card-link-secondary">ClawHub</a>
+        <a href="https://github.com/HumanjavaEnterprises/huje.sensememory.OC-python.src" class="card-link-secondary">Source</a>
+      </div>
+      <div class="code-block">
+        <span class="kw">from</span> sense_memory <span class="kw">import</span> <span class="fn">MemoryStore</span><br><br>
+        store = <span class="fn">MemoryStore</span>(identity, <span class="str">"wss://relay.nostrkeep.com"</span>)<br>
+        <span class="kw">await</span> store.<span class="fn">remember</span>(<span class="str">"user_tz"</span>, <span class="str">"America/Vancouver"</span>)<br>
+        mem = <span class="kw">await</span> store.<span class="fn">recall</span>(<span class="str">"user_tz"</span>)<br>
+        <span class="kw">await</span> store.<span class="fn">journal</span>(<span class="str">"Great conversation today"</span>)
       </div>
     </article>
 
