@@ -10,7 +10,7 @@
     window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
     plausible.init()
   </script>
-  <meta name="description" content="Open-source tools for AI agents and builders — alignment, profiles, memory, music analysis, social cards. From Humanjava Enterprises.">
+  <meta name="description" content="Open-source tools for AI agents and builders — alignment, profiles, memory, music analysis, social cards, micropayments. From Humanjava Enterprises.">
   <meta property="og:title" content="huje.tools — Tools for builders in the agentic age">
   <meta property="og:description" content="Open-source tools for AI agents and builders — alignment, profiles, memory, music analysis, social cards. From Humanjava Enterprises.">
   <meta property="og:image" content="https://huje.tools/og-image.png">
@@ -363,6 +363,29 @@
         result = <span class="fn">analyze</span>(<span class="str">"song.mp3"</span>)<br>
         <span class="kw">print</span>(result.summary)<br>
         result.<span class="fn">save</span>(<span class="str">"output/"</span>)
+      </div>
+    </article>
+
+    <article class="tool-card">
+      <div class="tool-header">
+        <h2>social-value</h2>
+        <span class="tool-badge">New</span>
+      </div>
+      <p class="tool-desc">Give your AI agent a wallet. Efficient micropayments via Breez SDK — Liquid or Spark backend, Lightning passports in/out, near-zero internal transfers. Red-team tested.</p>
+      <div class="card-install">pip install social-value[liquid]</div>
+      <div class="card-links">
+        <a href="https://pypi.org/project/social-value/" class="card-link-primary">PyPI</a>
+        <a href="https://clawhub.ai/vveerrgg/social-value" class="card-link-secondary">ClawHub</a>
+        <a href="https://github.com/HumanjavaEnterprises/huje.socialvalue.OC-python.src" class="card-link-secondary">Source</a>
+        <a href="/social-value" class="card-link-secondary">Docs</a>
+      </div>
+      <div class="code-block">
+        <span class="kw">from</span> social_value <span class="kw">import</span> <span class="fn">SocialValue</span>, <span class="fn">SocialValueConfig</span>, <span class="fn">SecretStr</span><br><br>
+        config = <span class="fn">SocialValueConfig</span>(breez_api_key=<span class="fn">SecretStr</span>(<span class="str">"your-key"</span>))<br>
+        <span class="kw">with</span> <span class="fn">SocialValue</span>(config=config, mnemonic=<span class="fn">SecretStr</span>(<span class="str">"twelve words..."</span>)) <span class="kw">as</span> wallet:<br>
+        &nbsp;&nbsp;invoice = wallet.<span class="fn">deposit</span>(amount_sat=<span class="fn">5000</span>)<br>
+        &nbsp;&nbsp;wallet.<span class="fn">transfer</span>(<span class="str">"liquid-addr"</span>, <span class="fn">100</span>, memo=<span class="str">"payout"</span>)<br>
+        &nbsp;&nbsp;wallet.<span class="fn">withdraw</span>(<span class="str">"lnbc1..."</span>, <span class="fn">4000</span>)
       </div>
     </article>
 
