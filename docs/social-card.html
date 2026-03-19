@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>socialcard — Social card image generator | huje.tools</title>
+  <title>social-card — Social card image generator | huje.tools</title>
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-Y18hngO006voDjcqVrFLi.js"></script>
   <script>
@@ -11,15 +11,15 @@
     plausible.init()
   </script>
   <meta name="description" content="Generate OG, Twitter, and GitHub social card images with a fluent builder API.">
-  <meta property="og:title" content="socialcard — Social card image generator | huje.tools">
+  <meta property="og:title" content="social-card — Social card image generator | huje.tools">
   <meta property="og:description" content="Generate OG, Twitter, and GitHub social card images with a fluent builder API.">
-  <meta property="og:image" content="https://huje.tools/og-socialcard.png">
-  <meta property="og:url" content="https://huje.tools/socialcard">
+  <meta property="og:image" content="https://huje.tools/og-social-card.png">
+  <meta property="og:url" content="https://huje.tools/social-card">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="socialcard — Social card image generator | huje.tools">
+  <meta name="twitter:title" content="social-card — Social card image generator | huje.tools">
   <meta name="twitter:description" content="Generate OG, Twitter, and GitHub social card images with a fluent builder API.">
-  <meta name="twitter:image" content="https://huje.tools/og-socialcard.png">
+  <meta name="twitter:image" content="https://huje.tools/og-social-card.png">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -190,17 +190,17 @@
 </head>
 <body>
   <main class="container">
-    <nav class="breadcrumb"><a href="/">huje.tools</a> / socialcard</nav>
+    <nav class="breadcrumb"><a href="/">huje.tools</a> / social-card</nav>
 
     <header class="hero">
-      <h1>socialcard</h1>
+      <h1>social-card</h1>
       <p class="tagline">Generate beautiful social card images with a fluent builder API. OG, Twitter, and GitHub presets with dark, light, and midnight themes. Single dependency: Pillow.</p>
 
-      <div class="install-bar">pip install socialcard</div>
+      <div class="install-bar">pip install social-card</div>
 
       <div class="links">
-        <a href="https://pypi.org/project/socialcard/" class="link-primary">PyPI</a>
-        <a href="https://clawhub.ai/vveerrgg/socialcard" class="link-secondary">ClawHub</a>
+        <a href="https://pypi.org/project/social-card/" class="link-primary">PyPI</a>
+        <a href="https://clawhub.ai/vveerrgg/social-card" class="link-secondary">ClawHub</a>
         <a href="https://github.com/HumanjavaEnterprises/huje.socialcard.OC-python.src" class="link-secondary">Source</a>
       </div>
     </header>
@@ -208,7 +208,7 @@
     <section>
       <h2>Quickstart</h2>
       <div class="code-block">
-<span class="kw">from</span> socialcard <span class="kw">import</span> <span class="fn">SocialCard</span>
+<span class="kw">from</span> social_card <span class="kw">import</span> <span class="fn">SocialCard</span>
 
 <span class="fn">SocialCard</span>(<span class="str">"og"</span>) \
     .<span class="fn">title</span>(<span class="str">"My Project"</span>) \
@@ -227,9 +227,9 @@
       <table>
         <tr><th>Preset</th><th>Size</th><th>Use Case</th></tr>
         <tr><td><code>og</code></td><td>1200x630</td><td>Open Graph (Facebook, LinkedIn, general)</td></tr>
-        <tr><td><code>twitter</code></td><td>1200x600</td><td>Twitter/X cards</td></tr>
+        <tr><td><code>twitter</code></td><td>800x418</td><td>Twitter/X cards</td></tr>
         <tr><td><code>github</code></td><td>1280x640</td><td>GitHub repository social preview</td></tr>
-        <tr><td><code>square</code></td><td>1200x1200</td><td>Instagram, general square format</td></tr>
+        <tr><td><code>square</code></td><td>1080x1080</td><td>Instagram, general square format</td></tr>
       </table>
     </section>
 
@@ -238,9 +238,9 @@
       <p>Built-in color themes for quick styling.</p>
       <table>
         <tr><th>Theme</th><th>Background</th><th>Text</th><th>Accent</th></tr>
-        <tr><td><code>dark</code></td><td><code>#0f172a</code></td><td><code>#f8fafc</code></td><td><code>#f97316</code></td></tr>
-        <tr><td><code>light</code></td><td><code>#ffffff</code></td><td><code>#1e293b</code></td><td><code>#f97316</code></td></tr>
-        <tr><td><code>midnight</code></td><td><code>#020617</code></td><td><code>#e2e8f0</code></td><td><code>#818cf8</code></td></tr>
+        <tr><td><code>dark</code></td><td><code>#0f172a</code></td><td><code>#f8fafc</code></td><td><code>#3b82f6</code></td></tr>
+        <tr><td><code>light</code></td><td><code>#ffffff</code></td><td><code>#0f172a</code></td><td><code>#3b82f6</code></td></tr>
+        <tr><td><code>midnight</code></td><td><code>#030712</code></td><td><code>#f9fafb</code></td><td><code>#8b5cf6</code></td></tr>
       </table>
     </section>
 
@@ -290,7 +290,7 @@
 
     <section>
       <h2>Part of the huje.tools Ecosystem</h2>
-      <p>socialcard is part of <a href="/">huje.tools</a>. It's used across the Humanjava ecosystem to generate OG images for landing pages, PyPI packages, and social shares. The OG images on this very site were generated with socialcard.</p>
+      <p>social-card is part of <a href="/">huje.tools</a>. It's used across the Humanjava ecosystem to generate OG images for landing pages, PyPI packages, and social shares. The OG images on this very site were generated with social-card.</p>
     </section>
   </main>
 

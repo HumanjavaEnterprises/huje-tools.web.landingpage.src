@@ -12,7 +12,7 @@ docs/                    ← GitHub Pages source (served from main branch)
   sense-wonder.html      ← /sense-wonder docs page
   sense-memory.html      ← /sense-memory docs page
   sense-music.html       ← /sense-music docs page
-  socialcard.html        ← /socialcard docs page
+  social-card.html       ← /social-card docs page
   support.html           ← /support — terms and contact
   og-image.png           ← Main site OG image
   og-sense-wonder.png    ← Per-tool OG images (generated with socialcard)
@@ -20,7 +20,7 @@ docs/                    ← GitHub Pages source (served from main branch)
   og-nostr-profile.png
   og-social-alignment.png
   og-sense-music.png
-  og-socialcard.png
+  og-social-card.png
   CNAME                  ← Custom domain: huje.tools
 ```
 
@@ -48,7 +48,7 @@ Each tool gets a dedicated page following the same template:
 9. Ecosystem section (links to NSE and sibling tools)
 10. Footer
 
-OG images generated with `socialcard` package (eating our own dogfood).
+OG images generated with `social-card` package (eating our own dogfood).
 
 ## Conventions
 
