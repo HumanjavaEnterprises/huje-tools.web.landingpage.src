@@ -54,7 +54,7 @@ OG images generated with `socialcard` package (eating our own dogfood).
 
 - Inline CSS only (no external stylesheets)
 - Tool cards on index link to PyPI (primary), ClawHub, Source, and Docs (per-tool page)
-- Example code uses generic names: `Johnny5`, `johnny5@example.com`, `https://example.com`
+- Example code uses generic names: `alice`, `alice@example.com`, `https://example.com`
 - Brand references only in footers and company attribution (humanjava.com)
 - `relay.nostrkeep.com` is the default relay in examples (our product)
 - Keep claims honest — only show what's live and working
