@@ -3,21 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>nostr-profile — Nostr profile management for AI agents | huje.tools</title>
-  <!-- Privacy-friendly analytics by Plausible -->
-  <script async src="https://plausible.io/js/pa-Y18hngO006voDjcqVrFLi.js"></script>
-  <script>
-    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-    plausible.init()
-  </script>
+  <title>nostr-profile: Nostr profile management for AI agents | huje.tools</title>
   <meta name="description" content="Give your AI agent a face. Publish, read, and update Nostr kind 0 profiles on any relay.">
-  <meta property="og:title" content="nostr-profile — Nostr profile management for AI agents | huje.tools">
+  <meta property="og:title" content="nostr-profile: Nostr profile management for AI agents | huje.tools">
   <meta property="og:description" content="Give your AI agent a face. Publish, read, and update Nostr kind 0 profiles on any relay.">
   <meta property="og:image" content="https://huje.tools/og-nostr-profile.png">
   <meta property="og:url" content="https://huje.tools/nostr-profile">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="nostr-profile — Nostr profile management for AI agents | huje.tools">
+  <meta name="twitter:title" content="nostr-profile: Nostr profile management for AI agents | huje.tools">
   <meta name="twitter:description" content="Give your AI agent a face. Publish, read, and update Nostr kind 0 profiles on any relay.">
   <meta name="twitter:image" content="https://huje.tools/og-nostr-profile.png">
   <style>
@@ -194,7 +188,7 @@
 
     <header class="hero">
       <h1>nostr-profile</h1>
-      <p class="tagline">Give your AI agent a face. Publish, read, and update Nostr kind 0 metadata — name, bio, avatar, NIP-05 verification, Lightning address. Built on NostrKey.</p>
+      <p class="tagline">Give your AI agent a face. Publish, read, and update Nostr kind 0 metadata, name, bio, avatar, NIP-05 verification, Lightning address. Built on NostrKey.</p>
 
       <div class="install-bar">pip install nostr-profile</div>
 
@@ -256,7 +250,7 @@ asyncio.<span class="fn">run</span>(main())
       <h3>update_profile(identity, relay_url, **fields) → str</h3>
       <p>Updates specific fields without clobbering existing ones. Fetches the current profile, merges changes, and republishes.</p>
       <div class="code-block">
-<span class="comment"># Only changes about — everything else stays</span>
+<span class="comment"># Only changes about, everything else stays</span>
 <span class="kw">await</span> <span class="fn">update_profile</span>(identity, relay, about=<span class="str">"Updated bio for Q2"</span>)
       </div>
 
@@ -279,13 +273,13 @@ asyncio.<span class="fn">run</span>(main())
     <section>
       <h2>Security</h2>
       <ul>
-        <li>Never hardcode an nsec — load from environment variable or encrypted file</li>
+        <li>Never hardcode an nsec, load from environment variable or encrypted file</li>
         <li>URLs must be HTTP/HTTPS, capped at 2048 chars</li>
         <li>Name max 100 chars, about max 2000</li>
         <li>NIP-05 and lud16 validated as user@domain.tld</li>
         <li>from_metadata tolerant of malformed relay data (drops bad fields silently)</li>
         <li>Relay queries capped at 100 events</li>
-        <li>No telemetry — no network calls except to the relay you configure</li>
+        <li>No telemetry. No network calls except to the relay you configure</li>
       </ul>
     </section>
 
@@ -320,13 +314,13 @@ asyncio.<span class="fn">run</span>(main())
 
     <section>
       <h2>Part of the NSE Ecosystem</h2>
-      <p>nostr-profile uses <a href="https://pypi.org/project/nostrkey/">NostrKey</a> for identity. It sits alongside <a href="/sense-memory">sense-memory</a>, <a href="https://pypi.org/project/nostrcalendar/">NostrCalendar</a>, <a href="https://pypi.org/project/nostrsocial/">NostrSocial</a>, and <a href="/social-alignment">social-alignment</a> in the <a href="https://nse.dev">NSE</a> sovereign identity stack.</p>
+      <p>nostr-profile uses <a href="https://pypi.org/project/nostrkey/">NostrKey</a> for identity. It sits alongside <a href="/sense-memory">sense-memory</a>, <a href="https://pypi.org/project/nostrcalendar/">NostrCalendar</a>, <a href="https://pypi.org/project/nostrsocial/">NostrSocial</a>, and <a href="/social-alignment">social-alignment</a> in the <a href="https://nse.dev">NSE</a> identity stack.</p>
       <p>The keypair is who you are. The profile is how the world sees you.</p>
     </section>
   </main>
 
   <footer>
-    <p><a href="/">huje.tools</a> &middot; <a href="https://humanjava.com">Humanjava Enterprises</a> &middot; MIT License &middot; <a href="/support">Support & Terms</a></p>
+    <p><a href="/">huje.tools</a> &middot; <a href="https://humanjava.com">Humanjava Enterprises</a> &middot; MIT License &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a> &middot; <a href="/support.html">Support</a></p>
   </footer>
 </body>
 </html>

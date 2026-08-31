@@ -3,21 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>sense-memory — Sovereign persistence for AI agents | huje.tools</title>
-  <!-- Privacy-friendly analytics by Plausible -->
-  <script async src="https://plausible.io/js/pa-Y18hngO006voDjcqVrFLi.js"></script>
-  <script>
-    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-    plausible.init()
-  </script>
+  <title>sense-memory: Portable persistence for AI agents | huje.tools</title>
   <meta name="description" content="Give your AI agent a memory. Encrypted key-value storage and journal entries on Nostr relays using the agent's own keypair.">
-  <meta property="og:title" content="sense-memory — Sovereign persistence for AI agents">
+  <meta property="og:title" content="sense-memory: Portable persistence for AI agents">
   <meta property="og:description" content="Encrypted key-value storage and journal entries on Nostr relays. Nobody else can read them.">
   <meta property="og:image" content="https://huje.tools/og-sense-memory.png">
   <meta property="og:url" content="https://huje.tools/sense-memory">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="sense-memory — Sovereign persistence for AI agents">
+  <meta name="twitter:title" content="sense-memory: Portable persistence for AI agents">
   <meta name="twitter:description" content="Encrypted key-value storage and journal entries on Nostr relays.">
   <meta name="twitter:image" content="https://huje.tools/og-sense-memory.png">
   <style>
@@ -194,7 +188,7 @@
 
     <header class="hero">
       <h1>sense-memory</h1>
-      <p class="tagline">Give your AI agent a memory. Encrypted key-value storage and journal entries on Nostr relays — the agent writes to itself using its own keypair. Nobody else can read them.</p>
+      <p class="tagline">Give your AI agent a memory. Encrypted key-value storage and journal entries on Nostr relays, the agent writes to itself using its own keypair. Nobody else can read them.</p>
 
       <div class="install-bar">pip install sense-memory</div>
 
@@ -282,13 +276,13 @@ entries = <span class="kw">await</span> store.<span class="fn">recent</span>(lim
     <section>
       <h2>Security</h2>
       <ul>
-        <li>All content is NIP-44 encrypted — only the agent's own keypair can decrypt</li>
+        <li>All content is NIP-44 encrypted, only the agent's own keypair can decrypt</li>
         <li>Memory keys validated: no slashes, backslashes, null bytes, or path traversal</li>
         <li>Content length capped at 65,000 characters</li>
         <li>Relay queries capped at 1,000 events (memory exhaustion prevention)</li>
         <li>Decrypted key verified against queried key (tamper detection)</li>
-        <li>No telemetry — no network calls except to the relay you configure</li>
-        <li>Never hardcode an nsec — load from environment variable or encrypted file</li>
+        <li>No telemetry. No network calls except to the relay you configure</li>
+        <li>Never hardcode an nsec, load from environment variable or encrypted file</li>
       </ul>
     </section>
 
@@ -323,13 +317,13 @@ entries = <span class="kw">await</span> store.<span class="fn">recent</span>(lim
 
     <section>
       <h2>Part of the NSE Ecosystem</h2>
-      <p>sense-memory uses <a href="https://pypi.org/project/nostrkey/">NostrKey</a> for identity and encryption. It sits alongside <a href="/nostr-profile">nostr-profile</a>, <a href="https://pypi.org/project/nostrcalendar/">NostrCalendar</a>, <a href="https://pypi.org/project/nostrsocial/">NostrSocial</a>, and <a href="/social-alignment">social-alignment</a> in the <a href="https://nse.dev">NSE</a> sovereign identity stack.</p>
-      <p>The agent's keypair is the thread that runs through everything. One identity, many capabilities — and now, persistent memory.</p>
+      <p>sense-memory uses <a href="https://pypi.org/project/nostrkey/">NostrKey</a> for identity and encryption. It sits alongside <a href="/nostr-profile">nostr-profile</a>, <a href="https://pypi.org/project/nostrcalendar/">NostrCalendar</a>, <a href="https://pypi.org/project/nostrsocial/">NostrSocial</a>, and <a href="/social-alignment">social-alignment</a> in the <a href="https://nse.dev">NSE</a> identity stack.</p>
+      <p>The agent's keypair is the thread that runs through everything. One identity, many capabilities, and now, persistent memory.</p>
     </section>
   </main>
 
   <footer>
-    <p><a href="/">huje.tools</a> &middot; <a href="https://humanjava.com">Humanjava Enterprises</a> &middot; MIT License &middot; <a href="/support">Support & Terms</a></p>
+    <p><a href="/">huje.tools</a> &middot; <a href="https://humanjava.com">Humanjava Enterprises</a> &middot; MIT License &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a> &middot; <a href="/support.html">Support</a></p>
   </footer>
 </body>
 </html>

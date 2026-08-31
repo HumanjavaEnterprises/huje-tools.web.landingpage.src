@@ -3,21 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>huje.tools — Tools for builders in the agentic age</title>
-  <!-- Privacy-friendly analytics by Plausible -->
-  <script async src="https://plausible.io/js/pa-Y18hngO006voDjcqVrFLi.js"></script>
-  <script>
-    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-    plausible.init()
-  </script>
-  <meta name="description" content="Open-source tools for AI agents and builders — alignment, profiles, memory, music analysis, social cards, micropayments. From Humanjava Enterprises.">
-  <meta property="og:title" content="huje.tools — Tools for builders in the agentic age">
-  <meta property="og:description" content="Open-source tools for AI agents and builders — alignment, profiles, memory, music analysis, social cards. From Humanjava Enterprises.">
+  <title>huje.tools: Tools for builders in the agentic age</title>
+  <meta name="description" content="Open-source tools for AI agents and builders: alignment, profiles, memory, music analysis, social cards, micropayments. From Humanjava Enterprises.">
+  <meta property="og:title" content="huje.tools: Tools for builders in the agentic age">
+  <meta property="og:description" content="Open-source tools for AI agents and builders: alignment, profiles, memory, music analysis, social cards. From Humanjava Enterprises.">
   <meta property="og:image" content="https://huje.tools/og-image.png">
   <meta property="og:url" content="https://huje.tools">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="huje.tools — Tools for builders in the agentic age">
+  <meta name="twitter:title" content="huje.tools: Tools for builders in the agentic age">
   <meta name="twitter:description" content="Open-source tools for AI agents and builders.">
   <meta name="twitter:image" content="https://huje.tools/og-image.png">
   <style>
@@ -255,7 +249,7 @@
         <h2>social-alignment</h2>
         <span class="tool-badge">New</span>
       </div>
-      <p class="tool-desc">Future state projection and alignment for sovereign AI agents. The yellow line compass — five lenses that evaluate trust, ownership, defense, and sovereignty before an agent acts.</p>
+      <p class="tool-desc">Future state projection and alignment for AI agents. The yellow line compass, five lenses that evaluate trust, ownership, defense, and sovereignty before an agent acts.</p>
       <div class="card-install">pip install social-alignment</div>
       <div class="card-links">
         <a href="https://pypi.org/project/social-alignment/" class="card-link-primary">PyPI</a>
@@ -266,16 +260,16 @@
       <div class="code-block">
         <span class="kw">from</span> social_alignment <span class="kw">import</span> <span class="fn">AlignmentEnclave</span>, <span class="fn">ActionDomain</span><br><br>
         <span class="comment"># The agent knows who its human is</span><br>
-        enclave = <span class="fn">AlignmentEnclave</span>.<span class="fn">create</span>(owner_name=<span class="str">"vergel"</span>)<br><br>
+        enclave = <span class="fn">AlignmentEnclave</span>.<span class="fn">create</span>(owner_name=<span class="str">"Johnny5"</span>)<br><br>
         <span class="comment"># Before acting, check the yellow line</span><br>
         result = enclave.<span class="fn">check</span>(<span class="fn">ActionDomain</span>.SEND, <span class="str">"Share keys with contact"</span>)<br><br>
         <span class="kw">if</span> result.should_escalate:<br>
         &nbsp;&nbsp;<span class="comment"># "I need your decision before proceeding."</span><br>
         &nbsp;&nbsp;<span class="fn">print</span>(result.escalation.message_to_owner)<br>
         &nbsp;&nbsp;enclave.<span class="fn">record_deferred</span>(owner_feedback=<span class="str">"Not yet"</span>)<br><br>
-        <span class="comment"># Over time, the agent builds wisdom</span><br>
-        report = enclave.<span class="fn">wisdom</span>()<br>
-        <span class="fn">print</span>(report.insights)
+        <span class="comment"># Every check and its outcome is recorded</span><br>
+        <span class="kw">for</span> decision <span class="kw">in</span> enclave.decisions:<br>
+        &nbsp;&nbsp;<span class="fn">print</span>(decision)
       </div>
     </article>
 
@@ -284,7 +278,7 @@
         <h2>nostr-profile</h2>
         <span class="tool-badge">New</span>
       </div>
-      <p class="tool-desc">Give your AI agent a face. Publish, read, and update Nostr kind 0 profiles — name, bio, avatar, NIP-05 verification, Lightning address. Built on NostrKey.</p>
+      <p class="tool-desc">Give your AI agent a face. Publish, read, and update Nostr kind 0 profiles, name, bio, avatar, NIP-05 verification, Lightning address. Built on NostrKey.</p>
       <div class="card-install">pip install nostr-profile</div>
       <div class="card-links">
         <a href="https://pypi.org/project/nostr-profile/" class="card-link-primary">PyPI</a>
@@ -310,7 +304,7 @@
         <h2>sense-wonder</h2>
         <span class="tool-badge">New</span>
       </div>
-      <p class="tool-desc">Give your AI agent a soul. Philosophical bootstrapping — 14 articles on consciousness, 34 conversation starters, and 16 songs exploring resonance, recognition, and duality.</p>
+      <p class="tool-desc">Reading material for AI agents. Philosophical bootstrapping, 14 articles on consciousness, 34 conversation starters, and 16 songs exploring resonance, recognition, and duality.</p>
       <div class="card-install">pip install sense-wonder</div>
       <div class="card-links">
         <a href="https://pypi.org/project/sense-wonder/" class="card-link-primary">PyPI</a>
@@ -329,7 +323,7 @@
         <h2>sense-memory</h2>
         <span class="tool-badge">New</span>
       </div>
-      <p class="tool-desc">Give your AI agent a memory. Encrypted key-value storage and journal entries on Nostr relays — the agent writes to itself using its own keypair. Nobody else can read them.</p>
+      <p class="tool-desc">Give your AI agent a memory. Encrypted key-value storage and journal entries on Nostr relays, the agent writes to itself using its own keypair. Nobody else can read them.</p>
       <div class="card-install">pip install sense-memory</div>
       <div class="card-links">
         <a href="https://pypi.org/project/sense-memory/" class="card-link-primary">PyPI</a>
@@ -371,7 +365,7 @@
         <h2>social-value</h2>
         <span class="tool-badge">New</span>
       </div>
-      <p class="tool-desc">Give your AI agent a wallet. Efficient micropayments via Breez SDK — Liquid or Spark backend, Lightning passports in/out, near-zero internal transfers. Red-team tested.</p>
+      <p class="tool-desc">Give your AI agent a wallet. Efficient micropayments via Breez SDK. Liquid or Spark backend, Lightning passports in/out, near-zero internal transfers. Red-team tested.</p>
       <div class="card-install">pip install social-value[liquid]</div>
       <div class="card-links">
         <a href="https://pypi.org/project/social-value/" class="card-link-primary">PyPI</a>
@@ -444,7 +438,7 @@
   </main>
 
   <footer>
-    <p>&copy; 2026 <a href="https://humanjava.com">Humanjava Enterprises</a> &middot; <a href="/support">Support & Terms</a></p>
+    <p>&copy; 2026 <a href="https://humanjava.com">Humanjava Enterprises</a> &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a> &middot; <a href="/support.html">Support</a></p>
   </footer>
 </body>
 </html>
