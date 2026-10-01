@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>social-value: Economic intelligence for AI agents | huje.tools</title>
   <link rel="canonical" href="https://huje.tools/social-value.html">
-  <meta name="description" content="Give your AI agent a wallet. Efficient micropayments via Breez SDK: Liquid or Spark backend, Lightning in/out, near-zero internal transfers.">
+  <meta name="description" content="An economic layer for AI agents: an early, experimental wallet for small payments. Installable on PyPI, not production-hardened.">
   <meta property="og:title" content="social-value: Economic intelligence for AI agents">
-  <meta property="og:description" content="Efficient micropayments via Breez SDK. Liquid or Spark backend, Lightning passports in/out, near-zero internal transfers.">
+  <meta property="og:description" content="An early, experimental self-custodial wallet for AI agents. Installable on PyPI.">
   <meta property="og:image" content="https://huje.tools/og-image.png">
   <meta property="og:url" content="https://huje.tools/social-value">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="social-value: Economic intelligence for AI agents">
-  <meta name="twitter:description" content="Efficient micropayments via Breez SDK. Liquid or Spark.">
+  <meta name="twitter:description" content="An early, experimental self-custodial wallet for AI agents. Installable on PyPI.">
   <meta name="twitter:image" content="https://huje.tools/og-image.png">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -187,143 +187,24 @@
 
     <header class="hero">
       <h1>social-value</h1>
-      <p class="tagline">Give your AI agent a wallet. Efficient micropayments via Breez SDK. Liquid or Spark backend, Lightning passports in/out, near-zero internal transfers. Red-team tested.</p>
+      <p class="tagline">An economic layer for AI agents. Lets an agent hold and move small amounts of value on its own, funded and drained over Lightning. Early release, not production-hardened.</p>
 
-      <div class="install-bar">pip install social-value[liquid]</div>
+      <div class="install-bar">pip install social-value</div>
 
       <div class="links">
         <a href="https://pypi.org/project/social-value/" class="link-primary">PyPI</a>
-        <a href="https://clawhub.ai/vveerrgg/social-value" class="link-secondary">ClawHub</a>
-        <a href="https://github.com/HumanjavaEnterprises/huje.socialvalue.OC-python.src" class="link-secondary">Source</a>
         <a href="https://huje.tools" class="link-secondary">huje.tools</a>
       </div>
     </header>
 
     <section>
-      <h2>What It Is</h2>
-      <p>social-value creates its own Liquid or Spark wallet from a BIP39 mnemonic. It is NOT connecting to an existing wallet, it IS one. Lightning is the passport in and out. Internal transfers cost near-zero.</p>
-      <table>
-        <tr><th>It IS</th><th>It is NOT</th></tr>
-        <tr><td>Its own wallet (mnemonic = wallet)</td><td>A Lightning wallet (no channels, no routing)</td></tr>
-        <tr><td>Self-custodial (you hold the keys)</td><td>Connecting to an existing wallet (that's NWC)</td></tr>
-        <tr><td>A Lightning gateway (bolt11 in/out)</td><td>A Bitcoin on-chain wallet</td></tr>
-        <tr><td>Two backends: Liquid or Spark</td><td>An exchange or trading platform</td></tr>
-      </table>
+      <h2>Status</h2>
+      <p>social-value is live on PyPI at 0.1.0 as an early, experimental release. It is installable today, but it is not production-hardened. The custody model, backends, and safety work are still maturing, so treat it as a preview and not a dependency you lean on in production.</p>
     </section>
 
     <section>
-      <h2>Quickstart</h2>
-      <div class="code-block">
-<span class="kw">from</span> social_value <span class="kw">import</span> <span class="fn">SocialValue</span>, <span class="fn">SocialValueConfig</span>, <span class="fn">SecretStr</span>
-
-config = <span class="fn">SocialValueConfig</span>(
-    breez_api_key=<span class="fn">SecretStr</span>(<span class="str">"your-breez-key"</span>),
-    backend=<span class="str">"liquid"</span>,  <span class="comment"># or "spark"</span>
-)
-
-<span class="kw">with</span> <span class="fn">SocialValue</span>(config=config, mnemonic=<span class="fn">SecretStr</span>(<span class="str">"twelve words..."</span>)) <span class="kw">as</span> wallet:
-    <span class="comment"># Deposit from Lightning (passport IN)</span>
-    invoice = wallet.<span class="fn">deposit</span>(amount_sat=<span class="fn">5000</span>)
-    <span class="fn">print</span>(<span class="str">f"Pay this: </span>{invoice}<span class="str">"</span>)
-
-    <span class="comment"># Check balance (L-BTC on Liquid)</span>
-    <span class="fn">print</span>(<span class="str">f"Balance: </span>{wallet.balance}<span class="str"> sats"</span>)
-
-    <span class="comment"># Transfer (near-zero fee on Liquid)</span>
-    wallet.<span class="fn">transfer</span>(<span class="str">"liquid-address"</span>, <span class="fn">100</span>, memo=<span class="str">"payout"</span>)
-
-    <span class="comment"># Withdraw to Lightning (passport OUT)</span>
-    wallet.<span class="fn">withdraw</span>(<span class="str">"lnbc1..."</span>, <span class="fn">4000</span>)
-      </div>
-    </section>
-
-    <section>
-      <h2>Two Backends, Same API</h2>
-      <p>Choose your rail. The API is identical either way.</p>
-      <table>
-        <tr><th>Backend</th><th>Install</th><th>Internal Fee</th><th>Swap Fee</th><th>Status</th></tr>
-        <tr><td>Liquid</td><td><code>pip install social-value[liquid]</code></td><td>~1 sat</td><td>~47 sats</td><td>Production</td></tr>
-        <tr><td>Spark</td><td><code>pip install social-value[spark]</code></td><td>~0 sats</td><td>~10 sats</td><td>Beta</td></tr>
-      </table>
-      <div class="code-block">
-<span class="comment"># Switch backend via config. No code changes needed</span>
-config = <span class="fn">SocialValueConfig</span>(breez_api_key=key, backend=<span class="str">"spark"</span>)
-      </div>
-    </section>
-
-    <section>
-      <h2>Why Not Just Lightning?</h2>
-      <p>Lightning routing fees are flat-ish. Small amounts get hit hardest.</p>
-      <table>
-        <tr><th>Scenario</th><th>Pure Lightning</th><th>social-value</th></tr>
-        <tr><td>1 payment of 5,000 sats</td><td>~3 sats (0.06%)</td><td>~95 sats (1.9%). Lightning wins</td></tr>
-        <tr><td>20 payments of 100 sats</td><td>~60 sats (3%)</td><td>~100 sats in/out + 20 sats internal = ~120 sats total</td></tr>
-        <tr><td>200 payments of 100 sats</td><td>~600 sats (3%)</td><td>~100 sats in/out + 200 sats internal = ~300 sats (1.5%)</td></tr>
-      </table>
-      <p>The more transfers per session, the bigger the advantage. Deposit once, transfer many times, withdraw once.</p>
-    </section>
-
-    <section>
-      <h2>API</h2>
-      <table>
-        <tr><th>Method</th><th>Returns</th><th>Description</th></tr>
-        <tr><td><code>connect()</code></td><td>None</td><td>Initialize wallet via Breez SDK</td></tr>
-        <tr><td><code>disconnect()</code></td><td>None</td><td>Clean up resources</td></tr>
-        <tr><td><code>get_state()</code></td><td><code>WalletState</code></td><td>Balance, pending amounts</td></tr>
-        <tr><td><code>balance</code></td><td><code>int</code></td><td>Confirmed balance in sats</td></tr>
-        <tr><td><code>deposit(amount_sat)</code></td><td><code>str</code></td><td>Create Lightning invoice to fund wallet</td></tr>
-        <tr><td><code>transfer(dest, amount_sat, memo)</code></td><td><code>TransferResult</code></td><td>Send sats (Liquid or Lightning)</td></tr>
-        <tr><td><code>batch_transfer(items)</code></td><td><code>tuple[TransferResult]</code></td><td>Send to multiple destinations</td></tr>
-        <tr><td><code>withdraw(dest, amount_sat)</code></td><td><code>TransferResult</code></td><td>Send sats back to Lightning</td></tr>
-        <tr><td><code>estimate_fees(action, amount_sat)</code></td><td><code>FeeEstimate</code></td><td>Estimate without executing</td></tr>
-        <tr><td><code>list_payments(limit, offset)</code></td><td><code>tuple[PaymentRecord]</code></td><td>Payment history</td></tr>
-      </table>
-    </section>
-
-    <section>
-      <h2>Security</h2>
-      <ul>
-        <li>Red-team audited: 19 findings identified, all CRITICAL/HIGH/MEDIUM fixed</li>
-        <li>SecretStr wraps all sensitive values, mnemonic and API key never appear in repr, str, logs, or tracebacks</li>
-        <li>SocialValueError sanitizes all exceptions. SDK internals never leak</li>
-        <li>Input validation on all entry points, amounts must be positive integers, destinations non-empty</li>
-        <li>Max balance safety cap prevents runaway accumulation</li>
-        <li>Path traversal blocked on working directory</li>
-        <li>Network validated against allowlist. No silent wrong-network</li>
-        <li>57 tests proving each security property</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Configuration</h2>
-      <table>
-        <tr><th>Variable</th><th>Required</th><th>Description</th></tr>
-        <tr><td><code>BREEZ_API_KEY</code></td><td>Yes</td><td>Breez SDK API key (free at breez.technology/sdk)</td></tr>
-        <tr><td><code>SOCIAL_VALUE_MNEMONIC</code></td><td>Yes</td><td>BIP39 mnemonic. This IS the wallet</td></tr>
-        <tr><td><code>SOCIAL_VALUE_BACKEND</code></td><td>No</td><td>"liquid" or "spark" (default: liquid)</td></tr>
-        <tr><td><code>SOCIAL_VALUE_NETWORK</code></td><td>No</td><td>"mainnet" or "testnet" (default: mainnet)</td></tr>
-        <tr><td><code>SOCIAL_VALUE_WORKING_DIR</code></td><td>No</td><td>SDK data directory (default: .breez_data)</td></tr>
-        <tr><td><code>SOCIAL_VALUE_MAX_BALANCE</code></td><td>No</td><td>Max sats to hold (default: 0 = no limit)</td></tr>
-      </table>
-    </section>
-
-    <section>
-      <h2>NWC vs social-value</h2>
-      <p>They're different things that complement each other.</p>
-      <table>
-        <tr><th></th><th>NWC</th><th>social-value</th></tr>
-        <tr><td>What it is</td><td>Protocol to control an existing wallet</td><td>Its own Liquid/Spark wallet</td></tr>
-        <tr><td>Who holds funds</td><td>Your wallet (Alby, Mutiny)</td><td>The mnemonic holder</td></tr>
-        <tr><td>Best for</td><td>Single large payments</td><td>Many small transfers</td></tr>
-        <tr><td>For an OC agent</td><td>"Use my operator's wallet"</td><td>"I have my own wallet"</td></tr>
-      </table>
-    </section>
-
-    <section>
-      <h2>Part of the huje.tools Ecosystem</h2>
-      <p>social-value is an <strong>outward</strong> skill (body to others) in the <a href="/">huje.tools</a> taxonomy. It sits alongside <a href="/social-alignment">social-alignment</a> (ethics) and <a href="/social-card">social-card</a> (presentation) as the economic dimension of social existence.</p>
-      <p>First consumer: <a href="https://medalloid.com">Medalloid</a>, batch payouts for 20+ players per round at near-zero fees.</p>
-      <p>Built on <a href="https://breez.technology/sdk/">Breez SDK</a> (Liquid and Spark backends).</p>
+      <h2>What it does</h2>
+      <p>It lets an AI agent hold and move small amounts of value on its own, without routing every transfer through an operator's wallet. Lightning is how funds move in and out. The direction of travel is a self-custodial economic identity an agent can manage for itself.</p>
     </section>
   </main>
 

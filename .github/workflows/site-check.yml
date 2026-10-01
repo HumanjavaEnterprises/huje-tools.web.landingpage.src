@@ -1,0 +1,31 @@
+name: site-check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  honest-installs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout site
+        uses: actions/checkout@v4
+        with:
+          path: site
+
+      - name: Checkout registry (source of truth)
+        uses: actions/checkout@v4
+        with:
+          repository: HumanjavaEnterprises/huje.registry.src
+          path: huje.registry.src
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check site cards against registry
+        env:
+          HUJE_REGISTRY: ${{ github.workspace }}/huje.registry.src/packages.yaml
+        run: python3 site/scripts/check_site_vs_registry.py
